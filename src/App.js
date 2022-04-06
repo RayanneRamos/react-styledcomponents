@@ -1,8 +1,29 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { ThemeProvider } from 'styled-components';
+import { temaClaro, temaEscuro } from './components/UI/temas';
+import Cabecalho from "./Components/Cabecalho";
+import Container from "./Components/Container";
+import { GlobalStyle } from "./components/GlobalStyle";
+import { BtnTema } from "./Components/UI";
+import SwitcherTema from "./Components/SwitcherTema";
 
 function App() {
+
+  const [tema, setTema] = useState(true);
+
+  const toggleTema = () => {
+    setTema((tema) => !tema);
+  };
+
   return (
-    <h1>Hello World.</h1>
+    <ThemeProvider theme={tema ? temaClaro : temaEscuro}>
+      <GlobalStyle />
+        <BtnTema onClick={toggleTema}>
+          <SwitcherTema tema={tema} />
+        </BtnTema>
+        <Cabecalho />
+      <Container />
+  </ThemeProvider>
   );
 }
 
